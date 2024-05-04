@@ -29,7 +29,7 @@ In this case, the volumes map some files that are used to be able to use docker 
     - **/var/run/docker.sock** is the docker socket that communicates the docker client and the docker daemon.
     - **/usr/bin/docker** is the docker binary to use the host machines docker from the container.
     - **/usr/libexec/docker/cli-plugins/docker-compose** is the docker compose plugin binary.
-- **-e** can me used to define the environment variables:
+- **-e** can be used to define the environment variables:
     - BASE_PATH: the path where the installed services are stored.
     Default value is "/opt/iombian-services".
     - WAIT_SECONDS: the time waited between changes to a service before restarting the service compose.
