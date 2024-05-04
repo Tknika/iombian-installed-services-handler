@@ -17,7 +17,7 @@ For example `docker build -t iombian-installed-services-hanlder:latest .`
 After building the image, execute it with docker run:
 
 ```
-docker run --name ${CONTAINER_NAME} --rm -d -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose -e BASE_PATH=/opt/iombian-services iombian-installed-services-hanlder:latest
+docker run --name ${CONTAINER_NAME} --rm -d -v /opt/iombian-serives:/opt/iombian-services -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose -e BASE_PATH=/opt/iombian-services iombian-installed-services-hanlder:latest
 ```
 
 - **--name** is used to define the name of the created container.
@@ -25,11 +25,12 @@ docker run --name ${CONTAINER_NAME} --rm -d -v /var/run/docker.sock:/var/run/doc
 - **-d** is used to run the container detached. This way the container will run in the background. This parameter is optional.
 - **-v** is used to pass volumes to the container.
 In this case, the volumes map some files that are used to be able to use docker from inside the docker container.
+    - **/opt/iombian-services** is the folder where the installed services are stored.
     - **/var/run/docker.sock** is the docker socket that communicates the docker client and the docker daemon.
     - **/usr/bin/docker** is the docker binary to use the host machines docker from the container.
     - **/usr/libexec/docker/cli-plugins/docker-compose** is the docker compose plugin binary.
 - **-e** can me used to define the environment variables:
-    - BASE_PATH: the path where the services installed services are stored.
+    - BASE_PATH: the path where the installed services are stored.
     Default value is "/opt/iombian-services".
     - WAIT_SECONDS: the time waited between changes to a service before restarting the service compose.
     It waits this time so multiple files can be edited at the same time without the service staring and stopping multiple times.
