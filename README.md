@@ -55,9 +55,13 @@ services:
       - /usr/bin/docker:/usr/bin/docker
       - /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose
     environment:
-      BASE_PATH: /opt/iombian-services
+      BASE_PATH: "/opt/iombian-services"
       WAIT_SECONDS: 1
-      LOG_LEVEL: INFO
+      LOG_LEVEL: "INFO"
+```
+
+```
+docker compose up -d
 ```
 
 ## Author
