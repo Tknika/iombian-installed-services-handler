@@ -46,8 +46,8 @@ version: 3
 
 services:
   iombian-installed-services-handler:
-    image: iombian-installed-services-hanlder
-    container_name: iombian-installed-services-hanlder
+    image: iombian-installed-services-handler:latest
+    container_name: iombian-installed-services-handler
     restart: unless_stopped
     volumes:
       - /opt/iombian-services:/opt/iombian-services
