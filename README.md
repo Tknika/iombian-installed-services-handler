@@ -12,12 +12,12 @@ To build the docker image, from the cloned repository, execute the docker build 
 docker build -t ${IMAGE_NAME}:${IMAGE_VERSION} .
 ```
 
-For example `docker build -t iombian-installed-services-hanlder:latest .`
+For example `docker build -t iombian-installed-services-handler:latest .`
 
 After building the image, execute it with docker run:
 
 ```
-docker run --name ${CONTAINER_NAME} --rm -d -v /opt/iombian-serives:/opt/iombian-services -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose -e BASE_PATH=/opt/iombian-services iombian-installed-services-hanlder:latest
+docker run --name ${CONTAINER_NAME} --rm -d -v /opt/iombian-services:/opt/iombian-services -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose -e BASE_PATH=/opt/iombian-services iombian-installed-services-handler:latest
 ```
 
 - **--name** is used to define the name of the created container.
