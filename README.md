@@ -39,6 +39,27 @@ In this case, the volumes map some files that are used to be able to use docker 
     This can be DEBUG, INFO, WARN or ERROR.
     Default value is INFO.
 
+Otherwise, a `docker-compose.yml` file can also be used to launch the container:
+
+```
+version: 3
+
+services:
+  iombian-installed-services-handler:
+    image: iombian-installed-services-hanlder
+    container_name: iombian-installed-services-hanlder
+    restart: unless_stopped
+    volumes:
+      - /opt/iombian-services:/opt/iombian-services
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose
+    environment:
+      BASE_PATH: /opt/iombian-services
+      WAIT_SECONDS: 1
+      LOG_LEVEL: INFO
+```
+
 ## Author
 (c) 2024 IoMBian team ([Aitor Iturrioz Rodríguez](https://github.com/bodiroga), [Aitor Castaño Mesa](https://github.com/aitorcas23)).
 
