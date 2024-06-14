@@ -5,11 +5,7 @@ from threading import Timer
 from typing import List, Optional
 
 from python_on_whales import DockerClient, docker
-from watchdog.events import (
-    FileModifiedEvent,
-    FileSystemEvent,
-    FileSystemEventHandler,
-)
+from watchdog.events import FileModifiedEvent, FileSystemEvent, FileSystemEventHandler
 from watchdog.observers import Observer
 from watchdog.observers.api import BaseObserver
 
