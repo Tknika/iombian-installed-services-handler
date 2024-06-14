@@ -124,7 +124,11 @@ class InstalledServiceHandler(FileSystemEventHandler):
         file = path.name
         folder = path.parts[-2]
 
-        if file in accepted_files and folder == self.service_name and event.event_type in events:
+        if (
+            file in accepted_files
+            and folder == self.service_name
+            and event.event_type in events
+        ):
             if self.timer:
                 self.timer.cancel()
                 self.timer = None
