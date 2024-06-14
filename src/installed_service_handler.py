@@ -5,7 +5,7 @@ from threading import Timer
 from typing import List, Optional
 
 from python_on_whales import DockerClient, docker
-from watchdog.events import FileModifiedEvent, FileSystemEvent, FileSystemEventHandler
+from watchdog.events import FileSystemEvent, FileSystemEventHandler
 from watchdog.observers import Observer
 from watchdog.observers.api import BaseObserver
 
@@ -108,21 +108,23 @@ class InstalledServiceHandler(FileSystemEventHandler):
 
         self.timer = None
 
-    def on_modified(self, event: FileSystemEvent):
+    def on_any_event(self, event: FileSystemEvent):
         """Reload the service when the service changes.
 
         The service changes when the docker-compose file or the .env file changes in the first level of the folder.
 
         """
-        if not isinstance(event, FileModifiedEvent):
+        if event.is_directory:
             return
 
         accepted_files = ["docker-compose.yaml", "docker-compose.yml", ".env"]
+        events = ["modified", "created", "deleted"]
+
         path = pathlib.Path(event.src_path)
         file = path.name
         folder = path.parts[-2]
 
-        if file in accepted_files and folder == self.service_name:
+        if file in accepted_files and folder == self.service_name and event.event_type in events:
             if self.timer:
                 self.timer.cancel()
                 self.timer = None
