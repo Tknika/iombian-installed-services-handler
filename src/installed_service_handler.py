@@ -18,6 +18,9 @@ class InstalledServiceHandler(FileSystemEventHandler):
     When a change occurs on the service the compose restarts.
     """
 
+    ACCEPTED_FILES = ["docker-compose.yaml", "docker-compose.yml", ".env"]
+    ACCEPTED_EVENTS = ["modified", "created", "deleted"]
+
     service_path: str
     """The full path of the service"""
     service_name: str
@@ -117,17 +120,14 @@ class InstalledServiceHandler(FileSystemEventHandler):
         if event.is_directory:
             return
 
-        accepted_files = ["docker-compose.yaml", "docker-compose.yml", ".env"]
-        events = ["modified", "created", "deleted"]
-
         path = pathlib.Path(event.src_path)
         file = path.name
         folder = path.parts[-2]
 
         if (
-            file in accepted_files
+            file in self.ACCEPTED_FILES
             and folder == self.service_name
-            and event.event_type in events
+            and event.event_type in self.ACCEPTED_EVENTS
         ):
             if self.timer:
                 self.timer.cancel()
